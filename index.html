@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="pl">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1.0, shrink-to-fit=no, viewport-fit=cover">
+
+  <title>Font Generator — LazyDuck Network</title>
+  <meta name="description" content="Niezależny, szybki generator czcionek i stylów tekstu od LazyDuck Network.">
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background-color: #080808;
+      color: #e0e0e0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    /* HEADER */
+    header {
+      background: #0c0c0f;
+      border-bottom: 1px solid #1f1f26;
+      padding: 18px 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+      color: #ffffff;
+      font-weight: bold;
+      font-size: 1.1rem;
+    }
+
+    .brand span {
+      font-size: 1.4rem;
+    }
+
+    .back-link {
+      color: #ffee00;
+      text-decoration: none;
+      font-size: 0.9rem;
+      font-weight: 600;
+      transition: opacity 0.2s;
+    }
+
+    .back-link:hover {
+      opacity: 0.8;
+    }
+
+    /* MAIN CONTENT */
+    main {
+      max-width: 900px;
+      width: 100%;
+      margin: 40px auto;
+      padding: 0 20px;
+      flex-grow: 1;
+    }
+
+    .title-section {
+      text-align: center;
+      margin-bottom: 30px;
+    }
+
+    .title-section h1 {
+      color: #ffee00;
+      font-size: 2.2rem;
+      margin-bottom: 8px;
+      text-shadow: 0 0 12px rgba(255, 238, 0, 0.2);
+    }
+
+    .title-section p {
+      color: #8e8e93;
+      font-size: 0.95rem;
+    }
+
+    .font-gen-box {
+      background: #0d0d12;
+      border: 1px solid #1f1f28;
+      border-radius: 16px;
+      padding: 25px;
+      margin-bottom: 30px;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+    }
+
+    .font-gen-input {
+      width: 100%;
+      background: #14141c !important;
+      border: 2px solid #282836 !important;
+      color: #ffee00 !important;
+      font-size: 1.25rem !important;
+      padding: 16px 20px !important;
+      border-radius: 12px !important;
+      outline: none !important;
+      transition: all 0.2s ease;
+    }
+
+    .font-gen-input:focus {
+      border-color: #ffee00 !important;
+      box-shadow: 0 0 18px rgba(255, 238, 0, 0.25) !important;
+    }
+
+    .font-results-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(380px, 1fr));
+      gap: 15px;
+      margin-top: 25px;
+    }
+
+    @media (max-width: 500px) {
+      .font-results-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .font-card {
+      background: #111117;
+      border: 1px solid #1e1e28;
+      border-radius: 10px;
+      padding: 14px 18px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      transition: all 0.2s ease;
+    }
+
+    .font-card:hover {
+      border-color: #ffee00;
+      transform: translateY(-2px);
+    }
+
+    .font-info {
+      overflow: hidden;
+    }
+
+    .font-label {
+      font-size: 0.75rem;
+      color: #72767d;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: 4px;
+      display: block;
+    }
+
+    .font-output {
+      font-size: 1.1rem;
+      color: #ffffff;
+      word-break: break-all;
+    }
+
+    .copy-btn {
+      background: #1a1a24;
+      color: #ffee00;
+      border: 1px solid #333344;
+      padding: 8px 14px;
+      border-radius: 8px;
+      font-size: 0.8rem;
+      font-weight: bold;
+      cursor: pointer;
+      white-space: nowrap;
+      transition: all 0.2s ease;
+    }
+
+    .copy-btn:hover {
+      background: #ffee00;
+      color: #000000;
+      border-color: #ffee00;
+    }
+
+    .copy-btn.copied {
+      background: #43b581 !important;
+      color: #ffffff !important;
+      border-color: #43b581 !important;
+    }
+
+    /* FOOTER */
+    footer {
+      background: #0c0c0f;
+      border-top: 1px solid #1f1f26;
+      padding: 20px;
+      text-align: center;
+      font-size: 0.85rem;
+      color: #72767d;
+    }
+
+    footer a {
+      color: #ffee00;
+      text-decoration: none;
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- HEADER -->
+  <header>
+    <a href="https://lazyducknetwork.github.io/docs" class="brand">
+      <span>🦆</span> LazyDuck Network
+    </a>
+    <a href="https://lazyducknetwork.github.io/docs" class="back-link">← Powrót do Dokumentacji</a>
+  </header>
+
+  <!-- MAIN -->
+  <main>
+    <div class="title-section">
+      <h1>🔤 Font Generator</h1>
+      <p>Wpisz swój tekst i skopiuj go w unikalnym stylu na Discorda, sociale czy profil!</p>
+    </div>
+
+    <div class="font-gen-box">
+      <input type="text" id="fontInput" class="font-gen-input" placeholder="Wpisz swój tekst tutaj..." value="LazyDuck Network" autofocus>
+      <div id="fontResults" class="font-results-grid"></div>
+    </div>
+  </main>
+
+  <!-- FOOTER -->
+  <footer>
+    © 2026 LazyDuck Network. Twórca: <strong style="color: #ff8800;">Ewewerban</strong> • <a href="https://buycoffee.to/ewewerban" target="_blank">Postaw kawę ☕</a>
+  </footer>
+
+  <script>
+    (function() {
+      const normal = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+
+      const fonts = [
+        { name: "Bold (Pogrubienie)", offsetLower: 0x1D41A, offsetUpper: 0x1D400, offsetDigit: 0x1D7CE },
+        { name: "Italic (Kursywa)", offsetLower: 0x1D44E, offsetUpper: 0x1D434, offsetDigit: null },
+        { name: "Bold Italic", offsetLower: 0x1D482, offsetUpper: 0x1D468, offsetDigit: null },
+        { name: "Script (Pismo Ręczne)", offsetLower: 0x1D4B6, offsetUpper: 0x1D49C, offsetDigit: null },
+        { name: "Bold Script", offsetLower: 0x1D4EA, offsetUpper: 0x1D4D0, offsetDigit: null },
+        { name: "Fraktur (Gotycki)", offsetLower: 0x1D51E, offsetUpper: 0x1D504, offsetDigit: null },
+        { name: "Bold Fraktur", offsetLower: 0x1D552, offsetUpper: 0x1D538, offsetDigit: null },
+        { name: "Double Struck (Ażurowy)", offsetLower: 0x1D586, offsetUpper: 0x1D56C, offsetDigit: 0x1D7D8 },
+        { name: "Sans-Serif Normal", offsetLower: 0x1D5BA, offsetUpper: 0x1D5A0, offsetDigit: 0x1D7E2 },
+        { name: "Sans-Serif Bold", offsetLower: 0x1D5EE, offsetUpper: 0x1D5D4, offsetDigit: 0x1D7EC },
+        { name: "Sans-Serif Italic", offsetLower: 0x1D622, offsetUpper: 0x1D608, offsetDigit: null },
+        { name: "Sans-Serif Bold Italic", offsetLower: 0x1D656, offsetUpper: 0x1D63C, offsetDigit: null },
+        { name: "Monospace (Kodowy)", offsetLower: 0x1D68A, offsetUpper: 0x1D670, offsetDigit: 0x1D7F6 },
+        { name: "Circled (W Kółeczkach)", customMap: buildCircledMap() },
+        { name: "Circled Dark (Czarne Kółka)", customMap: buildCircledDarkMap() },
+        { name: "Squared (W Kwadracikach)", customMap: buildSquaredMap() },
+        { name: "Squared Dark (Czarne Kwadraty)", customMap: buildSquaredDarkMap() },
+        { name: "Fullwidth (Szeroki)", customMap: buildFullwidthMap() },
+        { name: "Subscript (Indeks Dolny)", customMap: buildSubscriptMap() },
+        { name: "Superscript (Indeks Górny)", customMap: buildSuperscriptMap() },
+        { name: "Small Caps (Kapitaliki)", customMap: buildSmallCapsMap() },
+        { name: "Inverted (Do Góry Nogami)", customFunc: flipText }
+      ];
+
+      function convertUnicode(text, font) {
+        if (font.customFunc) return font.customFunc(text);
+        if (font.customMap) {
+          return text.split('').map(ch => font.customMap[ch] || ch).join('');
+        }
+
+        let res = '';
+        for (let i = 0; i < text.length; i++) {
+          let code = text.charCodeAt(i);
+          let char = text[i];
+
+          if (code >= 97 && code <= 122 && font.offsetLower) {
+            res += String.fromCodePoint(font.offsetLower + (code - 97));
+          } else if (code >= 65 && code <= 90 && font.offsetUpper) {
+            res += String.fromCodePoint(font.offsetUpper + (code - 65));
+          } else if (code >= 48 && code <= 57 && font.offsetDigit) {
+            res += String.fromCodePoint(font.offsetDigit + (code - 48));
+          } else {
+            res += char;
+          }
+        }
+        return res;
+      }
+
+      function buildCircledMap() {
+        let map = {};
+        const low = "ⓐⓑⓒⓓⓔⓕⓖⓗⓘⓙⓚⓛⓜⓝⓞⓟⓠⓡⓢⓣⓤⓥⓦⓧⓨⓩ";
+        const up = "ⒶⒷⒸⒹⒺⒻⒼⒽⒾⒿⓀⓁⓂⓃⓄⓅⓆⓇⓈⓉⓊⓋⓌⓍⓎⓏ";
+        const dig = "⓪①②③④⑤⑥⑦⑧⑨";
+        for (let i = 0; i < 26; i++) { map[normal[i]] = low[i]; map[normal[i+26]] = up[i]; }
+        for (let i = 0; i < 10; i++) map[normal[i+52]] = dig[i];
+        return map;
+      }
+
+      function buildCircledDarkMap() {
+        let map = {};
+        const low = "🅐🅑🅒🅓🅔🅕🅖HN🅘🅙🅚🅛🅜🅝🅞🅟🅠🅡🅢🅣🅤🅥🅦🅧🅨🅩";
+        const up = "🅐🅑🅒🅓🅔🅕🅖HN🅘🅙🅚🅛🅜🅝🅞🅟🅠🅡🅢🅣🅤🅥🅦🅧🅨🅩";
+        const dig = "⓿❶❷❸❹❺❻❼❽❾";
+        for (let i = 0; i < 26; i++) { map[normal[i]] = low[i]; map[normal[i+26]] = up[i]; }
+        for (let i = 0; i < 10; i++) map[normal[i+52]] = dig[i];
+        return map;
+      }
+
+      function buildSquaredMap() {
+        let map = {};
+        for (let i = 0; i < 26; i++) { 
+          let sq = String.fromCodePoint(0x1F130 + i);
+          map[normal[i]] = sq; 
+          map[normal[i+26]] = sq; 
+        }
+        return map;
+      }
+
+      function buildSquaredDarkMap() {
+        let map = {};
+        for (let i = 0; i < 26; i++) { 
+          let sq = String.fromCodePoint(0x1F170 + i);
+          map[normal[i]] = sq; 
+          map[normal[i+26]] = sq; 
+        }
+        return map;
+      }
+
+      function buildFullwidthMap() {
+        let map = {};
+        for (let i = 0; i < 52; i++) {
+          let code = normal.charCodeAt(i);
+          map[normal[i]] = String.fromCharCode(code + 0xFEE0);
+        }
+        return map;
+      }
+
+      function buildSubscriptMap() {
+        return { a:'ₐ', e:'ₑ', h:'ₕ', i:'ᵢ', k:'ₖ', l:'ₗ', m:'ₘ', n:'ₙ', o:'ₒ', p:'ₚ', r:'ᵣ', s:'ₛ', t:'ₜ', u:'ᵤ', v:'ᵥ', x:'ₓ', '0':'₀','1':'₁','2':'₂','3':'₃','4':'₄','5':'₅','6':'₆','7':'₇','8':'₈','9':'₉' };
+      }
+
+      function buildSuperscriptMap() {
+        return { a:'ᵃ', b:'ᵇ', c:'ᶜ', d:'ᵈ', e:'ᵉ', f:'ᶠ', g:'ᵍ', h:'ʰ', i:'ⁱ', j:'ʲ', k:'ᵏ', l:'ˡ', m:'ᵐ', n:'ⁿ', o:'ᵒ', p:'ᵖ', r:'ʳ', s:'ˢ', t:'ʇ', u:'ᵘ', v:'ᵛ', w:'ʷ', x:'ˣ', y:'ʸ', z:'ᶻ', '0':'⁰','1':'¹','2':'²','3':'³','4':'⁴','5':'⁵','6':'⁶','7':'⁷','8':'⁸','9':'⁹' };
+      }
+
+      function buildSmallCapsMap() {
+        return { a:'ᴀ', b:'ʙ', c:'ᴄ', d:'ᴅ', e:'ᴇ', f:'ꜰ', g:'ɢ', h:'ʜ', i:'ɪ', j:'ᴊ', k:'ᴋ', l:'ʟ', m:'ᴍ', n:'ɴ', o:'ᴏ', p:'ᴘ', q:'ǫ', r:'ʀ', s:'ꜱ', t:'ᴛ', u:'ᴜ', v:'ᴠ', w:'ᴡ', x:'x', y:'ʏ', z:'ᴢ' };
+      }
+
+      function flipText(text) {
+        const flipMap = {
+          'a':'ɐ','b':'q','c':'ɔ','d':'p','e':'ǝ','f':'ɟ','g':'ƃ','h':'ɥ','i':'ı','j':'ɾ','k':'ʞ','l':'l','m':'ɯ','n':'u','o':'o','p':'d','q':'b','r':'ɹ','s':'s','t':'ʇ','u':'n','v':'ʌ','w':'ʍ','x':'x','y':'ʎ','z':'z',
+          'A':'∀','B':'ᗺ','C':'Ɔ','D':'ᗡ','E':'Ǝ','F':'Ⅎ','G':'⅁','H':'H','I':'I','J':'ſ','K':'⋊','L':'⅂','M':'W','N':'N','O':'O','P':'Ԁ','Q':'Ò','R':'ᴚ','S':'S','T':'⊥','U':'∩','V':'Ʌ','W':'M','X':'X','Y':'⅄','Z':'Z',
+          '0':'0','1':'⇂','2':'ᄅ','3':'Ɛ','4':'ㄣ','5':'ϛ','6':'9','7':'ㄥ','8':'8','9':'6','?':'¿','!':'¡','.':'˙',',':'\'','\'':',','"':',,'
+        };
+        return text.split('').map(c => flipMap[c] || c).reverse().join('');
+      }
+
+      function updateFonts() {
+        const inputEl = document.getElementById('fontInput');
+        const input = inputEl.value || "LazyDuck Network";
+        const resultsContainer = document.getElementById('fontResults');
+        resultsContainer.innerHTML = '';
+
+        fonts.forEach((font, idx) => {
+          const converted = convertUnicode(input, font);
+          
+          const card = document.createElement('div');
+          card.className = 'font-card';
+          card.innerHTML = `
+            <div class="font-info">
+              <span class="font-label">${font.name}</span>
+              <div class="font-output" id="font-out-${idx}">${converted}</div>
+            </div>
+            <button class="copy-btn" onclick="copyFontText(${idx})">Kopiuj</button>
+          `;
+          resultsContainer.appendChild(card);
+        });
+      }
+
+      window.copyFontText = function(idx) {
+        const textToCopy = document.getElementById(`font-out-${idx}`).innerText;
+        navigator.clipboard.writeText(textToCopy).then(() => {
+          const btn = event.target;
+          btn.innerText = "Skopiowano!";
+          btn.classList.add('copied');
+          setTimeout(() => {
+            btn.innerText = "Kopiuj";
+            btn.classList.remove('copied');
+          }, 1500);
+        });
+      };
+
+      document.getElementById('fontInput').addEventListener('input', updateFonts);
+      updateFonts();
+    })();
+  </script>
+</body>
+
+</html>
